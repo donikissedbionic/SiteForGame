@@ -59,8 +59,8 @@
             }
         }
 
-        /* Fullscreen button styles */
-        .fullscreen-btn {
+        /* Button styles */
+        .play-btn {
             background-color: #1e90ff;
             color: #fff;
             border: none;
@@ -70,7 +70,7 @@
             margin-top: 10px;
         }
 
-        .fullscreen-btn:hover {
+        .play-btn:hover {
             background-color: #007acc;
         }
     </style>
@@ -89,7 +89,7 @@
             <p>Your browser doesn't support HTML5 canvas.</p>
         </canvas>
     </div>
-    <button class="fullscreen-btn" onclick="toggleFullScreen()" aria-label="Toggle full screen">Toggle Full Screen</button>
+    <button class="play-btn" onclick="startGame()" aria-label="Start game">Start Game</button>
     <p>Enjoy classic football gameplay and try to win the championship!</p>
 </div>
 
@@ -127,17 +127,10 @@
 
     window.addEventListener('resize', resizeCanvas); // Resize canvas on window resize
 
-    // Function to toggle full screen
-    function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            canvas.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-            });
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
+    // Function to start the game (to be implemented in your game logic)
+    function startGame() {
+        console.log("Starting the game...");
+        // You can add any game start logic here if needed.
     }
 </script>
 
