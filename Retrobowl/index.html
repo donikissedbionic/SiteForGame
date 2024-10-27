@@ -108,14 +108,35 @@
     <script type="text/javascript" src="html5game/RetroBowl.js"></script>
 
     <script>
-        // Show the loading screen
-        document.getElementById('GM4HTML5_loadingscreen').style.display = 'block';
+        (function() {
+            function fin(ok) {
+                (function checkInit() {
+                    var allowedHosts = ['localhost', 'poki.com', 'poki-gdn.com'];
+                    var isAllowed = allowedHosts.some(host => window.location.hostname.endsWith(host));
+                    if (!isAllowed) {
+                        window.location.href = 'https://poki.com/sitelock';
+                    }
+                }());
+                window.PokiSDK_OK = ok;
+                GameMaker_Init();
+            }
 
-        window.addEventListener("load", function(_) {
-            // Hide loading screen once the game is loaded
-            document.getElementById('GM4HTML5_loadingscreen').style.display = 'none';
-            GameMaker_Init(); // Initialize your game
-        });
+            window.addEventListener("load", function(_) {
+                document.getElementById('GM4HTML5_loadingscreen').style.display = 'block'; // Show loading screen
+                window.PokiSDK_loadState = 0;
+                if (window.PokiSDK) {
+                    PokiSDK.init().then(function() {
+                        fin(true);
+                        document.getElementById('GM4HTML5_loadingscreen').style.display = 'none'; // Hide loading screen
+                    }).catch(function() {
+                        fin(false);
+                    });
+                } else {
+                    window.PokiSDK = null;
+                    fin(false);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
