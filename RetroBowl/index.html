@@ -105,16 +105,19 @@
 
     function resizeCanvas() {
         const container = document.querySelector('.container');
-        canvas.width = container.clientWidth;
-        canvas.height = 600; // or any fixed height you desire
+        canvas.width = container.clientWidth; // Set width to the container's width
+        canvas.height = 600; // Fixed height for the canvas
     }
 
     window.onload = () => {
         resizeCanvas();
         loadingScreen.style.display = 'block'; // Show loading screen
 
+        console.log("Attempting to initialize the game...");
+
         if (typeof GameMaker_Init === 'function') {
             GameMaker_Init();
+            console.log("Game initialized successfully.");
             loadingScreen.style.display = 'none'; // Hide loading screen after game initializes
         } else {
             console.error("GameMaker_Init function is not defined.");
