@@ -96,10 +96,11 @@
         window.addEventListener("load", function() {
             resizeCanvas();
 
+            // Check if GameMaker_Init is defined
             if (typeof GameMaker_Init === "function") {
                 GameMaker_Init(); // Initialize your game
             } else {
-                console.error("GameMaker_Init function is not defined.");
+                console.error("GameMaker_Init function is not defined. Make sure RetroBowl.js is loaded correctly.");
             }
         });
 
@@ -120,6 +121,8 @@
             console.log("Canvas clicked at:", x, y);
             if (typeof GameMaker_ClickHandler === "function") {
                 GameMaker_ClickHandler(x, y);
+            } else {
+                console.error("GameMaker_ClickHandler function is not defined.");
             }
         });
 
