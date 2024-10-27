@@ -58,21 +58,6 @@
                 height: 400px; /* Adjust height for smaller screens */
             }
         }
-
-        /* Fullscreen button styles */
-        .fullscreen-btn {
-            background-color: #1e90ff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .fullscreen-btn:hover {
-            background-color: #007acc;
-        }
     </style>
 </head>
 <body>
@@ -85,11 +70,15 @@
     <h2>Play the Game</h2>
     <div class="gm4html5_div_class" id="gm4html5_div_id">
         <img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="GameMaker:HTML5 loading screen" style="display:none;"/>
+        <!-- Create the canvas element the game draws to -->
         <canvas id="canvas">
             <p>Your browser doesn't support HTML5 canvas.</p>
         </canvas>
+        <script>
+            document.querySelector('canvas').width = window.innerWidth;
+            document.querySelector('canvas').height = window.innerHeight;
+        </script>
     </div>
-    <button class="fullscreen-btn" onclick="toggleFullScreen()">Toggle Full Screen</button>
     <p>Enjoy classic football gameplay and try to win the championship!</p>
 </div>
 
@@ -97,35 +86,9 @@
     <p>&copy; 2024 Yousif's Site. All rights reserved.</p>
 </footer>
 
-<!-- Load the game code -->
+<!-- Run the game code -->
 <script type="text/javascript" src="html5game/RetroBowl.js"></script>
-<script>
-    const canvas = document.getElementById('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    // Initialize the game once the script has loaded
-    window.onload = () => {
-        if (typeof GameMaker_Init === 'function') {
-            GameMaker_Init();
-        } else {
-            console.error("GameMaker_Init function is not defined.");
-        }
-    };
-
-    // Function to toggle full screen
-    function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            canvas.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-            });
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            }
-        }
-    }
-</script>
+<script>window.onload = GameMaker_Init;</script>
 
 </body>
 </html>
