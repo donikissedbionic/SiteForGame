@@ -4,112 +4,82 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="pragma" content="no-cache"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name ="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta charset="utf-8"/>
         <style>
             body {
-                background: #121212; /* Dark background for modern look */
-                color: #e0e0e0; /* Light grey text for readability */
-                margin: 0;
-                padding: 0;
-                border: 0;
-                overflow: hidden;
-                font-family: Arial, sans-serif; /* Modern font */
+              background: #000;
+              color:#cccccc;
+              margin: 0px;
+              padding: 0px;
+              border: 0px;
+              overflow: hidden;
             }
             canvas {
-                image-rendering: optimizeSpeed;
-                -webkit-interpolation-mode: nearest-neighbor;
-                margin: 0;
-                padding: 0;
-                border: 0;
+                      image-rendering: optimizeSpeed;
+                      -webkit-interpolation-mode: nearest-neighbor;
+                      -ms-touch-action: none;
+                      margin: 0px;
+                      padding: 0px;
+                      border: 0px;
             }
             :-webkit-full-screen #canvas {
-                width: 100%;
-                height: 100%;
+                 width: 100%;
+                 height: 100%;
             }
-            .gm4html5_div_class {
-                display: flex;
-                flex-direction: column;
-                align-items: center; /* Center the loading screen */
-                justify-content: center;
-                height: 100vh; /* Full height */
-                margin: 0;
-                padding: 0;
-                border: 0;
+            div.gm4html5_div_class
+            {
+              margin: 0px;
+              padding: 0px;
+              border: 0px;
             }
-            .gm4html5_login {
-                padding: 20px;
-                position: absolute;
-                border: solid 2px #424242; /* Dark grey border */
-                background-color: #333; /* Darker background for the login box */
-                color: #00bcd4; /* Blue accent for text */
-                border-radius: 15px;
-                box-shadow: #101010 20px 20px 40px;
-                text-align: center; /* Center text */
+            /* START - Login Dialog Box */
+            div.gm4html5_login
+            {
+                 padding: 20px;
+                 position: absolute;
+                 border: solid 2px #000000;
+                 background-color: #404040;
+                 color:#00ff00;
+                 border-radius: 15px;
+                 box-shadow: #101010 20px 20px 40px;
             }
-            #GM4HTML5_loadingscreen {
-                display: block;
-                margin-bottom: 20px; /* Space below loading screen */
+            div.gm4html5_cancel_button
+            {
+                 float: right;
             }
-            button {
-                background-color: #00bcd4; /* Blue button background */
-                color: #ffffff; /* White text */
-                border: none;
-                border-radius: 5px;
-                padding: 10px 20px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-                font-size: 16px;
+            div.gm4html5_login_button
+            {
+                 float: left;
             }
-            button:hover {
-                background-color: #0097a7; /* Darker blue on hover */
+            div.gm4html5_login_header
+            {
+                 text-align: center;
             }
+            /* END - Login Dialog Box */
             :-webkit-full-screen {
-                width: 100%;
-                height: 100%;
+               width: 100%;
+               height: 100%;
             }
         </style>
     </head>
 
     <body>
         <div class="gm4html5_div_class" id="gm4html5_div_id">
-            <img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="GameMaker:HTML5 loading screen" style="display:block;"/>
+        <img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="GameMaker:HTML5 loading screen" style="display:none;"/>
+            <!-- Create the canvas element the game draws to -->
             <canvas id="canvas">
-                <p>Your browser doesn't support HTML5 canvas.</p>
+                     <p>Your browser doesn't support HTML5 canvas.</p>
             </canvas>
+            <script>
+                document.querySelector('canvas').width = window.innerWidth;
+                document.querySelector('canvas').height = window.innerHeight;
+            </script>
         </div>
 
         <!-- Run the game code -->
         <script type="text/javascript" src="html5game/RetroBowl.js"></script>
-        <script>
-            const canvas = document.getElementById('canvas');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            window.onload = function() {
-                console.log("Window loaded. Initializing game...");
-                
-                // Show loading screen
-                document.getElementById('GM4HTML5_loadingscreen').style.display = 'block';
-                
-                // Check if GameMaker_Init function exists
-                if (typeof GameMaker_Init === "function") {
-                    GameMaker_Init(); // Initialize the game
-                    console.log("Game initialized successfully.");
-                    
-                    // Hide loading screen after initialization
-                    document.getElementById('GM4HTML5_loadingscreen').style.display = 'none';
-                } else {
-                    console.error("GameMaker_Init function is not defined.");
-                    alert("Game failed to load. Please check the console for errors.");
-                }
-            };
-
-            window.addEventListener('resize', function() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-        </script>
+        <script>window.onload = GameMaker_Init;</script>
     </body>
 </html>
