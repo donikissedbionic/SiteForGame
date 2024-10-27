@@ -53,6 +53,12 @@
             width: 100%;
             text-align: center;
         }
+
+        @media (max-width: 600px) {
+            iframe {
+                height: 400px; /* Adjust height for smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -63,7 +69,7 @@
 
 <div class="container">
     <h2>Play the Game</h2>
-    <iframe src="https://retro-bowl-six.vercel.app" title="Retro Bowl Game"></iframe>
+    <iframe src="RetroBowl/index.html" title="Retro Bowl Game" aria-label="Retro Bowl Game"></iframe>
     <p>Enjoy classic football gameplay and try to win the championship!</p>
 </div>
 
