@@ -13,29 +13,9 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-        }
-
-        header {
-            background: #1e90ff; /* Dodger Blue */
-            width: 100%;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            width: 100%;
-            margin-top: 20px;
-            padding: 20px;
-            text-align: center;
+            height: 100vh; /* Full height for centering */
         }
 
         canvas {
@@ -45,93 +25,42 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        footer {
-            margin-top: 30px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            width: 100%;
-            text-align: center;
-        }
-
         @media (max-width: 600px) {
             canvas {
                 height: 400px; /* Adjust height for smaller screens */
             }
         }
-
-        /* Button styles */
-        .play-btn {
-            background-color: #1e90ff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .play-btn:hover {
-            background-color: #007acc;
-        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Welcome to Retro Bowl!</h1>
-</header>
-
-<div class="container">
-    <h2>Play the Game</h2>
-    <div class="gm4html5_div_class" id="gm4html5_div_id">
-        <img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="GameMaker:HTML5 loading screen" style="display:none;"/>
-        <canvas id="canvas">
-            <p>Your browser doesn't support HTML5 canvas.</p>
-        </canvas>
-    </div>
-    <button class="play-btn" onclick="startGame()" aria-label="Start game">Start Game</button>
-    <p>Enjoy classic football gameplay and try to win the championship!</p>
-</div>
-
-<footer>
-    <p>&copy; 2024 Yousif's Site. All rights reserved.</p>
-</footer>
+<canvas id="canvas">
+    <p>Your browser doesn't support HTML5 canvas.</p>
+</canvas>
 
 <!-- Load the game code -->
 <script type="text/javascript" src="html5game/RetroBowl.js"></script>
 <script>
     const canvas = document.getElementById('canvas');
-    const loadingScreen = document.getElementById('GM4HTML5_loadingscreen');
 
     function resizeCanvas() {
-        const container = document.querySelector('.container');
-        canvas.width = container.clientWidth; // Set width to the container's width
+        canvas.width = window.innerWidth; // Set width to the window's width
         canvas.height = 600; // Fixed height for the canvas
     }
 
     window.onload = () => {
         resizeCanvas();
-        loadingScreen.style.display = 'block'; // Show loading screen
-
         console.log("Attempting to initialize the game...");
 
         if (typeof GameMaker_Init === 'function') {
             GameMaker_Init();
             console.log("Game initialized successfully.");
-            loadingScreen.style.display = 'none'; // Hide loading screen after game initializes
         } else {
             console.error("GameMaker_Init function is not defined.");
-            loadingScreen.style.display = 'none'; // Hide loading screen on error
         }
     };
 
     window.addEventListener('resize', resizeCanvas); // Resize canvas on window resize
-
-    // Function to start the game (to be implemented in your game logic)
-    function startGame() {
-        console.log("Starting the game...");
-        // You can add any game start logic here if needed.
-    }
 </script>
 
 </body>
