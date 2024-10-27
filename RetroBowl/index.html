@@ -11,27 +11,27 @@
             body {
                 background: #000;
                 color: #cccccc;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
+                margin: 0;
+                padding: 0;
+                border: 0;
                 overflow: hidden;
             }
             canvas {
                 image-rendering: optimizeSpeed;
                 -webkit-interpolation-mode: nearest-neighbor;
                 -ms-touch-action: none;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
+                margin: 0;
+                padding: 0;
+                border: 0;
             }
             :-webkit-full-screen #canvas {
                 width: 100%;
                 height: 100%;
             }
             div.gm4html5_div_class {
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
+                margin: 0;
+                padding: 0;
+                border: 0;
             }
             /* START - Login Dialog Box */
             div.gm4html5_login {
@@ -68,29 +68,27 @@
             </canvas>
         </div>
 
+        <!-- Run the game code -->
+        <script type="text/javascript" src="html5game/RetroBowl.js"></script>
         <script>
-            const canvas = document.querySelector('canvas');
+            const canvas = document.getElementById('canvas');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
+            // Show loading screen when the game starts
+            document.getElementById('GM4HTML5_loadingscreen').style.display = 'block';
+
+            window.onload = function() {
+                GameMaker_Init(); // Initialize the game
+                // Hide loading screen after initialization (or you can use a timeout to simulate loading)
+                document.getElementById('GM4HTML5_loadingscreen').style.display = 'none';
+            };
+
+            // Resize canvas on window resize
             window.addEventListener('resize', function() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             });
-
-            document.getElementById('GM4HTML5_loadingscreen').style.display = 'block';
-
-            window.onload = function() {
-                const script = document.createElement('script');
-                script.src = 'html5game/RetroBowl.js';
-                script.onerror = function() {
-                    alert('Error loading game. Please try again.');
-                };
-                document.body.appendChild(script);
-                script.onload = function() {
-                    document.getElementById('GM4HTML5_loadingscreen').style.display = 'none'; // Hide when game is ready
-                };
-            };
         </script>
     </body>
 </html>
