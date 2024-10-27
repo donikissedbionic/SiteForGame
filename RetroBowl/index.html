@@ -58,6 +58,21 @@
                 height: 400px; /* Adjust height for smaller screens */
             }
         }
+
+        /* Fullscreen button styles */
+        .fullscreen-btn {
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .fullscreen-btn:hover {
+            background-color: #007acc;
+        }
     </style>
 </head>
 <body>
@@ -75,10 +90,25 @@
             <p>Your browser doesn't support HTML5 canvas.</p>
         </canvas>
         <script>
-            document.querySelector('canvas').width = window.innerWidth;
-            document.querySelector('canvas').height = window.innerHeight;
+            const canvas = document.querySelector('canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Function to toggle full screen
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    canvas.requestFullscreen().catch(err => {
+                        console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                    });
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            }
         </script>
     </div>
+    <button class="fullscreen-btn" onclick="toggleFullScreen()">Toggle Full Screen</button>
     <p>Enjoy classic football gameplay and try to win the championship!</p>
 </div>
 
