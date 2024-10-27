@@ -61,25 +61,6 @@
             z-index: 1;
         }
 
-        div.gm4html5_login {
-            padding: 20px;
-            position: absolute;
-            border: solid 2px #000000;
-            background-color: #404040;
-            color: #00ff00;
-            border-radius: 15px;
-            box-shadow: #101010 20px 20px 40px;
-            width: 300px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-        }
-
-        div.gm4html5_login_header {
-            text-align: center;
-        }
-
         footer {
             margin-top: 30px;
             padding: 15px;
@@ -93,12 +74,10 @@
 <body>
     <header>
         <h1>Welcome to Yousif's Game Page!</h1>
-        <p>Loading your favorite games...</p>
+        <p>Enjoy your game!</p>
     </header>
 
     <div class="gm4html5_div_class" id="gm4html5_div_id">
-        <img src="html5game/splash.png" id="GM4HTML5_loadingscreen" alt="Loading screen for the game, please wait." style="width: 100%; height: 100%; display: none;" />
-        
         <!-- Updated canvas with fixed width and height attributes for sharper rendering -->
         <canvas id="canvas" width="800" height="600">
             <p>Your browser doesn't support HTML5 canvas.</p>
@@ -112,20 +91,10 @@
     <script type="text/javascript" src="html5game/RetroBowl.js"></script>
 
     <script>
-        // Show the loading screen
-        document.getElementById('GM4HTML5_loadingscreen').style.display = 'block';
-
-        window.addEventListener("load", function(_) {
-            // Hide loading screen once the game is loaded
-            document.getElementById('GM4HTML5_loadingscreen').style.display = 'none';
-            resizeCanvas(); // Initial resize
-            GameMaker_Init(); // Initialize your game
-        });
-
-        // Add click event listener to canvas
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
 
+        // Add click event listener to canvas
         canvas.addEventListener("click", (event) => {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -146,7 +115,8 @@
             ctx.scale(scale, scale); // Scale the context for sharp rendering
         }
 
-        // Call resizeCanvas on window resize to maintain quality
+        // Initial resize and set up resize event
+        window.addEventListener("load", resizeCanvas);
         window.addEventListener("resize", resizeCanvas);
     </script>
 </body>
