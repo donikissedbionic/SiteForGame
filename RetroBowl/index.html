@@ -49,12 +49,11 @@
             position: relative;
         }
 
-        /* Updated canvas styling for smoother rendering */
         canvas {
-            width: 90%; /* Makes canvas responsive */
+            width: 90%; 
             height: auto;
-            max-width: 100vh; /* Limits to viewport height */
-            image-rendering: auto; /* For smoother graphics */
+            max-width: 100vh; 
+            image-rendering: auto; 
             touch-action: none;
             border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
@@ -78,7 +77,6 @@
     </header>
 
     <div class="gm4html5_div_class" id="gm4html5_div_id">
-        <!-- Updated canvas with fixed width and height attributes for sharper rendering -->
         <canvas id="canvas" width="800" height="600">
             <p>Your browser doesn't support HTML5 canvas.</p>
         </canvas>
@@ -91,8 +89,27 @@
     <script type="text/javascript" src="html5game/RetroBowl.js"></script>
 
     <script>
+        // Only declare canvas and context once
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
+
+        window.addEventListener("load", function() {
+            resizeCanvas();
+
+            if (typeof GameMaker_Init === "function") {
+                GameMaker_Init(); // Initialize your game
+            } else {
+                console.error("GameMaker_Init function is not defined.");
+            }
+        });
+
+        // Resize canvas based on device pixel ratio for sharper rendering
+        function resizeCanvas() {
+            const scale = window.devicePixelRatio; 
+            canvas.width = 800 * scale; 
+            canvas.height = 600 * scale; 
+            ctx.scale(scale, scale); 
+        }
 
         // Add click event listener to canvas
         canvas.addEventListener("click", (event) => {
@@ -101,22 +118,12 @@
             const y = event.clientY - rect.top;
 
             console.log("Canvas clicked at:", x, y);
-            // Replace with your game’s click function, if available
             if (typeof GameMaker_ClickHandler === "function") {
                 GameMaker_ClickHandler(x, y);
             }
         });
 
-        // Resize canvas based on device pixel ratio for sharper rendering
-        function resizeCanvas() {
-            const scale = window.devicePixelRatio; // Get device pixel ratio
-            canvas.width = 800 * scale; // Adjust width
-            canvas.height = 600 * scale; // Adjust height
-            ctx.scale(scale, scale); // Scale the context for sharp rendering
-        }
-
-        // Initial resize and set up resize event
-        window.addEventListener("load", resizeCanvas);
+        // Set up resize event
         window.addEventListener("resize", resizeCanvas);
     </script>
 </body>
